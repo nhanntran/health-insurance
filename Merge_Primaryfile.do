@@ -687,13 +687,13 @@ save "E:\Research\Health_insurance\data\VHLSS 2012\Data_Processing\business_inco
 
 //2014
 //2014
-use "", clear
+/* use "", clear
 egen id_num1 = concat(tinh huyen xa diaban hoso), punct(-)
 sort id_num1
 egen inc_m4b0c5= total(m4b0c5-m4b0c4), by(tinh huyen xa diaban hoso)
 bysort id_num1: gen pid=_n
 drop if pid!=1
-save "",replace
+save "",replace */
 
 use "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\VHLSS2014_Households\Muc4B11.dta",clear
 egen id_num1 = concat(tinh huyen xa diaban hoso), punct(-)
@@ -899,9 +899,8 @@ gen net_inc_others=  inc_m4c1c18-exp_m4c2c33
 drop m4c* inc_* exp_*
 save "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\other_agri.dta", replace
 
-use "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\m4b0.dta", clear ///////////////// Why there is no mb40.dta
-merge 1:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\trongtrot.dta"
-drop _merge
+/*use "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\m4b0.dta", clear ///////////////// Why there is no mb40.dta */
+use "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\trongtrot.dta", clear
 merge 1:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\channuoi.dta"
 drop _merge
 merge 1:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\dichvu.dta"
@@ -914,8 +913,8 @@ merge 1:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104
 drop _merge
 merge 1:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\m4d.dta"
 drop _merge
-drop m4d* m4b*
-replace inc_m4b0c5=0 if inc_m4b0c5==.
+drop m4d* 
+/* replace inc_m4b0c5=0 if inc_m4b0c5==.*/
 replace net_inc_agri=0 if net_inc_agri==.
 replace net_inc_chan_nuoi=0 if net_inc_chan_nuoi==.
 replace net_inc_dichvu=0 if net_inc_dichvu==.
@@ -923,7 +922,7 @@ replace net_inc_thuysan=0 if net_inc_thuysan==.
 replace net_inc_forest=0 if net_inc_forest==.
 replace net_inc_others=0 if net_inc_others==.
 replace inc_m4d=0 if inc_m4d==.
-gen total_business_income=inc_m4b0c5+ net_inc_agri+net_inc_chan_nuoi+net_inc_dichvu+net_inc_forest+ net_inc_others+ net_inc_thuysan+inc_m4d
+gen total_business_income=/*inc_m4b0c5 + */ net_inc_agri+net_inc_chan_nuoi+net_inc_dichvu+net_inc_forest+ net_inc_others+ net_inc_thuysan+inc_m4d
 save "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\business_income_2014.dta",replace
 
 //2016
@@ -1176,6 +1175,9 @@ use "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_proc
 drop id_num1
 egen id_num1= concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\business_income_2010.dta"
+drop _merge
+drop id_num1
+egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2010.dta",replace
 
 //2012
@@ -1184,6 +1186,9 @@ drop id_num1
 drop _merge
 egen id_num1= concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2012\Data_Processing\business_income_2012.dta"
+drop _merge
+drop id_num1
+egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2012.dta",replace
 
 //2014 (Run business income_2014 again without m4b0.dta)
@@ -1191,6 +1196,9 @@ use "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\mer
 drop id_num1
 egen id_num1=concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\business_income_2014.dta"
+drop _merge
+drop id_num1
+egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\final_2014.dta", replace
 
 //2016 
@@ -1198,7 +1206,20 @@ use "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\merge_2016.dta
 drop id_num1
 egen id_num1=concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\business_income_2016.dta"
+drop _merge
+drop id_num1
+egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\final_2016.dta",replace
+
+*******************************Append data from 2010-2016**************************************************** Check lai ma cac variable
+
+use "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2010.dta",clear
+append using "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2012.dta"
+append using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\final_2014.dta"
+append using  "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\final_2016.dta"
+save "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\data_2010-2016.dta", replace
+
+
 
 
 
