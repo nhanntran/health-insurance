@@ -1176,7 +1176,36 @@ drop id_num1
 egen id_num1= concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\business_income_2010.dta"
 drop _merge
-drop id_num1
+drop id_num1 m1ac1 m1ac1a m1ac8 m1ac9 m1ac10 m1ac11n m1ac11t m4ac4c m4ac4m m4ac5 m4ac6 m4ac7 m4ac8a m4ac8b m4ac9 m4ac10 m4ac13a m4ac13b m4ac13c m4ac14 m4ac15a m4ac15m m4ac16c m4ac16m m4ac16 m4ac17 m4ac18 m4ac19 m4ac20 m4ac21 m4ac22 m4ac25 m4ac26 m3c2
+rename m4ac3 occ1
+rename m4ac11 wage1
+rename m4ac12a wage_bonus1
+rename m4ac12b wage_others1
+rename m4ac15 occ2
+rename m4ac23 wage2
+rename m4ac24a wage_bonus2
+rename m4ac24b wage_others2
+rename m4ac28a unemploy_ins
+rename m4ac28b resign_aid
+rename m4ac28c pension
+rename m4ac28d early_retire
+rename m4ac28e one_time_aid
+rename m3c3a csyt
+rename m3c3b csyt_ten
+rename m3c4 mucdich
+rename m3c5a outpatient_visit
+rename m3c5b outpatient_exp
+rename m3c6a inpatient_visit
+rename m3c6b inpatient_exp
+rename m3c9 byht
+rename m3c10a loai_bhyt
+rename m3c10b loai_bhyt2
+rename m3c11 chiphi_mua_bhyt
+rename m3c12a outpatient_use
+rename m3c12b inpatient_use
+rename m3c13 oop_exp
+rename m3c14 health_equip
+rename m3c15 health_aid
 egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2010.dta",replace
 
@@ -1187,7 +1216,36 @@ drop _merge
 egen id_num1= concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2012\Data_Processing\business_income_2012.dta"
 drop _merge
-drop id_num1
+drop id_num1 m1ac7 m1ac8 m1ac9 m1ac10 m1ac11n m1ac11t m4ac4m m4ac4c m4ac4 m4ac5 m4ac6 m4ac7 m4ac8a m4ac8b m4ac9 m4ac10 m4ac13a m4ac13b m4ac13c m4ac14 m4ac15a m4ac15m m4ac16c m4ac16m m4ac16 m4ac17 m4ac18 m4ac19 m4ac20 m4ac21 m4ac22 m4ac25 m4ac26 m4a2c* m3c2
+rename m4ac3 occ1
+rename m4ac11 wage1
+rename m4ac12a wage_bonus1
+rename m4ac12b wage_others1
+rename m4ac15 occ2
+rename m4ac23 wage2
+rename m4ac24a wage_bonus2
+rename m4ac24b wage_others2
+rename m4ac28a unemploy_ins
+rename m4ac28b resign_aid
+rename m4ac28c pension
+rename m4ac28d early_retire
+rename m4ac28e one_time_aid
+rename m3c3a csyt
+rename m3c3b csyt_ten
+rename m3c4 mucdich
+rename m3c5a outpatient_visit
+rename m3c5b outpatient_exp
+rename m3c6a inpatient_visit
+rename m3c6b inpatient_exp
+rename m3c9 byht
+rename m3c10a loai_bhyt
+rename m3c10b loai_bhyt2
+rename m3c11 chiphi_mua_bhyt
+rename m3c12a outpatient_use
+rename m3c12b inpatient_use
+rename m3c13 oop_exp
+rename m3c14 health_equip
+rename m3c15 health_aid
 egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2012.dta",replace
 
@@ -1197,7 +1255,36 @@ drop id_num1
 egen id_num1=concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\business_income_2014.dta"
 drop _merge
-drop id_num1
+drop id_num1 m1ac7* m1ac8 m1ac9 m1ac10 m1ama1 m1ac15* m4ac4c m4ac4m m4ac4 m4ac5 m4ac6 m4ac7 m4ama1 m4ac8* m4ac9 m4ac10 m4ac13* m4ama2 m4ac14 m4ac15a m4ac15m m4ac16c m4ac16m m4ac16 m4ac17 m4ac18 m4ac19 m4ama3 m4ac20 m4ac21 m4ac22 m4ac25 m4ac26 m4ama4
+rename m4ac3 occ1
+rename m4ac11 wage1
+rename m4ac12a wage_bonus1
+rename m4ac12b wage_others1
+rename m4ac15 occ2
+rename m4ac23 wage2
+rename m4ac24a wage_bonus2
+rename m4ac24b wage_others2
+rename m4ac28a unemploy_ins
+rename m4ac28b resign_aid
+rename m4ac28c pension
+rename m4ac28d early_retire
+rename m4ac28e one_time_aid
+rename m3c3a csyt
+rename m3c3b csyt_ten
+rename m3c4 mucdich
+rename m3c5a outpatient_visit
+rename m3c5b outpatient_exp
+rename m3c6a inpatient_visit
+rename m3c6b inpatient_exp
+rename m3c9 byht
+rename m3c10a loai_bhyt
+rename m3c10b loai_bhyt2
+rename m3c11 chiphi_mua_bhyt
+rename m3c12a outpatient_use
+rename m3c12b inpatient_use
+rename m3c13 oop_exp
+rename m3c14 health_equip
+rename m3c15 health_aid
 egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\final_2014.dta", replace
 
@@ -1207,7 +1294,37 @@ drop id_num1
 egen id_num1=concat(tinh huyen xa diaban hoso), punct(-)
 merge m:1 id_num1 using "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\business_income_2016.dta"
 drop _merge
-drop id_num1
+drop id_num1 m1ac7* m1ac8 m1ac9 m1ac10 m1ama1 m1ac15* m1ac16 m4ac4c m4ac4m m4ac4 m4ac5 m4ac6 m4ac7 m4ama1 m4ac8* m4ac9 m4ac10 m4ac13* m4ac14 m4ama2 m4ac15 m4ac16 m4ac17 m4ac19* m4ac20 m4ama3 m4ac21 m4ac22 m4ac23 m4ac24 m4ac25 m4ama4 m4ac28 m4ac29
+rename m4ac3 occ1
+rename m4ac11 wage1
+rename m4ac12a wage_bonus1
+rename m4ac12b wage_others1
+rename m4ac18 occ2
+rename m4ac26 wage2
+rename m4ac27a wage_bonus2
+rename m4ac27b wage_others2
+rename m4ac31a unemploy_ins
+rename m4ac31b resign_aid
+rename m4ac31c pension
+rename m4ac31d early_retire
+rename m4ac31e one_time_aid
+rename m3c3a csyt
+rename m3c3b csyt_ten
+rename m3c4 mucdich
+rename m3c5a outpatient_visit
+rename m3c5b outpatient_exp
+rename m3c6a inpatient_visit
+rename m3c6b inpatient_exp
+rename m3c9 byht
+rename m3c10a loai_bhyt
+rename m3c10b loai_bhyt2
+rename m3c11 chiphi_mua_bhyt
+rename m3c12a outpatient_use
+rename m3c12b inpatient_use
+rename m3c13 oop_exp
+rename m3c14 health_equip
+rename m3c15 health_aid
+
 egen id_num1= concat(tinh huyen xa diaban hoso matv), punct(-)
 save "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\final_2016.dta",replace
 
