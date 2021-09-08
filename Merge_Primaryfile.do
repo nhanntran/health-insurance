@@ -1334,9 +1334,75 @@ use "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_proc
 append using "E:\Research\Health_insurance\data\VHLSS 2010\VHLSS 2010\Data 2010\Data_processing\final_2012.dta"
 append using "E:\Research\Health_insurance\data\VHLSS 2014\VHLSS 2104\Data_Processing\final_2014.dta"
 append using  "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\final_2016.dta"
-save "E:\Research\Health_insurance\data\VHLSS 2016\Data_Processing\data_2010-2016.dta", replace
+save "E:\Research\Health_insurance\data\data_2010-2016.dta", replace
+
+
+******************************* Data************************
+use "E:\Research\Health_insurance\data\data_2010-2016.dta", clear
+egen xa_id=concat(tinh huyen xa), punct(-)
+merge m:1 xa_id using "E:\summer2021\Project 600\stata\stata\dsxa_new.dta"
+drop province* district* treat_580 xa_name cb* communeID_GIS communeN_GIS communeN1_GIS communeN_2017 communeID_2009 communeN_2009
+drop if _merge==2
+drop _merge
+save "E:\Research\Health_insurance\data\data_2010-2016.dta", replace
 
 
 
 
+use "E:\Research\Health_insurance\data\data_2010-2016.dta",clear
+replace wage1=0  if wage1==.
+replace wage_bonus1=0 if wage_bonus1==.
+replace wage_others1=0 if wage_others1==.
+replace wage2=0  if wage2==.
+replace wage_bonus2=0 if wage_bonus2==.
+replace wage_others2=0 if wage_others2==.
+replace unemploy_ins=0 if unemploy_ins==.
+replace resign_aid=0 if resign_aid==.
+replace pension=0 if pension==.
+replace early_retire=0 if early_retire==.
+replace one_time_aid=0 if one_time_aid==.
+
+gen all_wage= wage1+ wage_bonus1+wage_others1+ wage2+ wage_bonus2+ wage_others2+ unemploy_ins+resign_aid+pension+early_retire+one_time_aid
+// Wage by household
+egen wage_household= total(all_wage), by(tinh huyen xa diaban hoso year)
+gen income_hh= wage_household+ total_business_income
+// The number of household member
+rename m1ac3 relate
+drop if relate==8|relate==9|relate==7
+egen sotv=count(id_num1), by(tinh huyen xa diaban hoso year)
+gen income_capita= income_hh/sotv
+
+replace byht=0 if byht==2
+
+winsor income_capita , gen(income_capita_n) p(0.01)
+hist income_capita_n
+
+//number of children
+egen no_child=total(relate==3), by(tinh huyen xa diaban hoso year)
+
+gen single=0
+replace single=1 if m1ac6==1 & m1ac5>18
+
+gen rural=0
+replace rural=1 if communeTypeN_1=="Xã"
+
+gen insurance=0
+replace insurance=1 if loai_bhyt==2|loai_bhyt==3
+
+rdplot insurance income_capita_n if rural==0,c(6000) graph_options(title(RD plot) ytitle(Covered by any insurance package) xtitle(Income per capita))
+
+//McCrary (2008) test
+DCdensity income_capita_n if rural==1, breakpoint(4800) generate(Xj Yj r0 fhat se_fhat) graphname(DCdensity_example.eps)
+
+//Lee(2010) test
+net install rddensity, from(https://raw.githubusercontent.com/rdpackages/rddensity/master/stata) replace
+rddensity income_capita_n if rural==0,c(6000)
+
+//RDD
+rdbwselect outpatient_visit income_capita_n, c(4800) fuzzy(insurance) covs(m1ac5 m1ac2) kernel(uniform)
+rdrobust outpatient_visit income_capita_n, c(4800) fuzzy(insurance) h(1013 1013) kernel(uniform)
+
+// RD multi package
+
+ net install rdmulti, from(https://raw.githubusercontent.com/rdpackages/rdmulti/master/stata) replace
 
